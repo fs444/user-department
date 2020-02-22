@@ -6,7 +6,6 @@ use App\User;
 use Illuminate\Http\Request;
 use DB;
 
-
 class UsersController extends Controller
 {
     public function __construct() {
@@ -43,23 +42,19 @@ class UsersController extends Controller
         $user_exist = User::where('email', '=', $request->input('user_email'))->first();
 
         if (empty($user_exist)) {
-            $add_user = User::insert([
-                'name' => $request->input('user_name'),
-                'email' => $request->input('user_email'),
-                'password' => bcrypt($request->input('user_password'))
-            ]);
+            $user = new User();
+            $user->name = $request->input('user_name');
+            $user->email = $request->input('user_email');
+            $user->password = bcrypt($request->input('user_password'));
+            $user->save();
 
-            if ($add_user) {
-                return view('users.create_user');
-            } else {
-                return 'create user error';
-            }
+            return view('users.create_user');
         } else {
             return view('users.exist_user');
         }
     }
 
-    public function add()
+    public function add(Request $request)
     {
         return view('users.add_user');
     }
@@ -84,34 +79,25 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'user_name' => 'required|min:3|max:255',
+            'user_email' => 'required|email'
+        ]);
+
+        $user = User::find($request->input('user_id'));
+        $user->name = $request->input('user_name');
+        $user->email = $request->input('user_email');
+
         if ($request->input('user_password')) {
             $request->validate([
-                'user_name' => 'required|min:3|max:255',
-                'user_email' => 'required|email',
                 'user_password' => 'min:3|max:255'
             ]);
 
-            $add_user = User::where('id', '=', $request->input('user_id'))->update([
-                'name' => $request->input('user_name'),
-                'email' => $request->input('user_email'),
-                'password' => bcrypt($request->input('user_password')),
-            ]);
-        } else {
-            $request->validate([
-                'user_name' => 'required|min:3|max:255',
-                'user_email' => 'required|email'
-            ]);
-
-            $add_user = User::where('id', '=', $request->input('user_id'))->update([
-                'name' => $request->input('user_name'),
-                'email' => $request->input('user_email')
-            ]);
+            $user->password = $request->input('user_password');
         }
 
-        if ($add_user) {
-            return view('users.update_user');
-        } else {
-            return 'update user problem';
-        }
+        $user->save();
+
+        return view('users.update_user');
     }
 }

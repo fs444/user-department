@@ -33,7 +33,7 @@ class Department extends Model
 
         echo "</ol>";
     }
-
+    
     /**
      *
      * Очищаем список пользователей, прикрепленных к отделу
@@ -42,7 +42,7 @@ class Department extends Model
      *
      * @return void
      */
-    public static function clearDepartmentUsers($department_id)
+    public function clearDepartmentUsers($department_id)
     {
         DB::table('users_departments')->where('department_id', '=', $department_id)->delete();
     }
@@ -51,19 +51,19 @@ class Department extends Model
      *
      * Указываем полученных пользователей для отдела
      *
-     * @param Request $request
+     * @param array $user_id_arr
+     * @param int $department_id
      *
      * @return void
      */
-    public static function setDepartmentUsers(Request $request)
+    public function addDepartmentUsers($user_id_arr, $department_id)
     {
-        if ($request->input('user_id')) {
-            //очистим записи о всех юзерах этого департмента
-            Department::clearDepartmentUsers($request->input('department_id'));
-
-            foreach ($request->input('user_id') as $user_id) {
+        $this->clearDepartmentUsers($department_id);
+        
+        if (!empty($user_id_arr)) {
+            foreach ($user_id_arr as $user_id) {
                 //добавляем в департамент указанных юзеров
-                DB::table('users_departments')->insert(['user_id' => $user_id, 'department_id' => $request->input('department_id')]);
+                DB::table('users_departments')->insert(['user_id' => $user_id, 'department_id' => $department_id]);
             }
         }
     }

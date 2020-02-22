@@ -41,37 +41,31 @@ class DepartmentsController extends Controller
             'department_name' => 'required|min:3|max:255'
         ]);
 
-        $add_department = Department::insertGetId([
-            'name' => $request->input('department_name'),
-            'description' => $request->input('deparment_descr'),
-            'logo' => 'images/default.jpg'
-        ]);
+        $department = new Department();
+        $department->name = $request->input('department_name');
+        $department->description = $request->input('deparment_descr');
+        $department->logo = 'images/default.jpg';
+        $department->save();
+
+        //получим id только что добавленного отдела
+        $last_id = DB::getPdo()->lastInsertId();
 
         if ($request->file('deparment_logo')) {
             $file_extension = "." . $request->file('deparment_logo')->getClientOriginalExtension();
 
             $file_path = $request->file('deparment_logo')->storeAs('images', $request->input('department_id') . $file_extension);
 
-            $department = Department::find($add_department);
+            $department = Department::find($last_id);
             $department->logo = $file_path;
             $department->save();
         }
 
         if ($request->input('user_id')) {
             //очистим записи о всех юзерах этого департмента
-            Department::clearDepartmentUsers($request->input('department_id'));
-
-            foreach ($request->input('user_id') as $user_id) {
-                //добавляем в департамент указанных юзеров
-                DB::table('users_departments')->insert(['user_id' => $user_id, 'department_id' => $add_department]);
-            }
+            $department->addDepartmentUsers($request->input('user_id'), $last_id);
         }
 
-        if ($add_department) {
-            return view('departments.create_department');
-        } else {
-            return 'create department error';
-        }
+        return view('departments.create_department');
     }
 
     public function add()
@@ -116,25 +110,25 @@ class DepartmentsController extends Controller
 
     public function update(Request $request)
     {
-        $add_department = Department::where('id', '=', $request->input('department_id'))->update([
-            'name' => $request->input('department_name'),
-            'description' => $request->input('deparment_descr'),
-        ]);
+        $department = Department::find($request->input('department_id'));
+        $department->name = $request->input('department_name');
+        $department->description = $request->input('deparment_descr');
+        $department->logo = 'images/default.jpg';
 
         if ($request->file('deparment_logo')) {
             $file_extension = "." . $request->file('deparment_logo')->getClientOriginalExtension();
 
             $file_path = $request->file('deparment_logo')->storeAs('images', $request->input('department_id') . $file_extension);
 
+            $department->logo = $file_path;
+
             Department::where('id', '=', $request->input('department_id'))->update(['logo' => $file_path]);
         }
 
-        Department::setDepartmentUsers($request);
+        $department->save();
 
-        if ($add_department) {
-            return view('departments.update_department');
-        } else {
-            return 'update deparment problem';
-        }
+        $department->addDepartmentUsers($request->input('user_id'), $request->input('department_id'));
+
+        return view('departments.update_department');
     }
 }

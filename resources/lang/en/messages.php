@@ -48,4 +48,7 @@ return [
     'not_deleting_department' => 'Error. Department has users',
 
     'exist_user' => 'User already exist',
+
+    'success_update_user' => 'Success update user',
+    'go_to_user_list' => 'go to user list'
 ];

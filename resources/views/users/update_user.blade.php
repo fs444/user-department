@@ -6,9 +6,9 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <p>Success update user</p>
+                    <p>{{ __('messages.success_update_user') }}</p>
 
-                    <p><a href="/users">go to user list</a></p>
+                    <p><a href="/users">{{ __('messages.go_to_user_list') }}</a></p>
                 </div>
             </div>
         </div>
