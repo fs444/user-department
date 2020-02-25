@@ -53,7 +53,7 @@ class DepartmentsController extends Controller
         if ($request->file('deparment_logo')) {
             $file_extension = "." . $request->file('deparment_logo')->getClientOriginalExtension();
 
-            $file_path = $request->file('deparment_logo')->storeAs('images', $request->input('department_id') . $file_extension);
+            $file_path = $request->file('deparment_logo')->storeAs('images', $last_id . $file_extension);
 
             $department = Department::find($last_id);
             $department->logo = $file_path;
@@ -83,6 +83,9 @@ class DepartmentsController extends Controller
 
         if ($user_in_department == 0) {
             $department = Department::find($department_id);
+
+            $department->deleteDepartmentImg($department->logo);
+
             $department->delete();
 
             return view('departments.delete_department');
@@ -113,7 +116,6 @@ class DepartmentsController extends Controller
         $department = Department::find($request->input('department_id'));
         $department->name = $request->input('department_name');
         $department->description = $request->input('deparment_descr');
-        $department->logo = 'images/default.jpg';
 
         if ($request->file('deparment_logo')) {
             $file_extension = "." . $request->file('deparment_logo')->getClientOriginalExtension();

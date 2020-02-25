@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Department extends Model
 {
@@ -33,7 +32,7 @@ class Department extends Model
 
         echo "</ol>";
     }
-    
+
     /**
      *
      * Очищаем список пользователей, прикрепленных к отделу
@@ -59,13 +58,47 @@ class Department extends Model
     public function addDepartmentUsers($user_id_arr, $department_id)
     {
         $this->clearDepartmentUsers($department_id);
-        
+
         if (!empty($user_id_arr)) {
             foreach ($user_id_arr as $user_id) {
                 //добавляем в департамент указанных юзеров
                 DB::table('users_departments')->insert(['user_id' => $user_id, 'department_id' => $department_id]);
             }
         }
+    }
+
+    /**
+     *
+     * Отображаем путь к картинке отдела или к картинке по умолчанию
+     *
+     * @param string $storage_path
+     * @param string $logo
+     *
+     * @return string
+     */
+    public function showDepartmentImg($storage_path, $logo)
+    {
+        if (Storage::disk('public')->exists($logo)) {
+            $path = $storage_path . "/" . $logo;
+        } else {
+            $path = "/images/default.jpg";
+        }
+
+        echo $path;
+    }
+
+    /**
+     *
+     * Удаляем картинку при удалении отдела
+     *
+     * @param string $image_path
+     *
+     * return void
+     *
+     */
+    public function deleteDepartmentImg($image_path)
+    {
+        Storage::disk('public')->delete($image_path);
     }
 
     /**

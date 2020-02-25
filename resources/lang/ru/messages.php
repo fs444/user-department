@@ -36,7 +36,7 @@ return [
 
     'success_deleting_department' => 'Удаление отдела завершено',
 
-    'you_are_logged_in' => 'Вы вошли в систему!!',
+    'you_are_logged_in' => 'Вы вошли в систему!',
 
     'enter_name' => 'Введите имя',
     'enter_email' => 'Введите e-mail',

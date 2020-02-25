@@ -12,7 +12,7 @@
                     <table class="table">
                         @foreach ($department_list as $department)
                             <tr>
-                                <td><img src="{{ asset('storage') }}/{{$department->logo}}" width="200" height="133" class="img-thumbnail"></td>
+                                <td><img src="{{$department->showDepartmentImg(asset('storage'), $department->logo)}}" width="200" height="133" class="img-thumbnail"></td>
                                 <td>
                                     <div class="font-weight-bold">{{$department->name}}</div>
                                     <div>{{$department->description}}</div>
