@@ -179,7 +179,8 @@ class DepartmentsControllerNew extends Controller
 //            return view('departments.delete_department');
             return redirect('/departments')->with('delete_dep_name', $department_name);
         } else {
-            return view('departments.not_delete_department');
+//            return view('departments.not_delete_department');
+            return redirect('/departments')->with('not_delete_dep_name', '1');
         }
     }
 }

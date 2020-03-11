@@ -10,20 +10,38 @@
                 </div>
                 <div class="card-body">
                     @if (session('add_dep_name'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             Отдел {{session('add_dep_name')}} добавлен
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
                     
                     @if (session('delete_dep_name'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             Отдел {{session('delete_dep_name')}} удален
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    
+                    @if (session('not_delete_dep_name'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Ошибка. В отделе есть пользователи.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
                     
                     @if (session('edit_dep_name'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             Отдел {{session('edit_dep_name')}} отредактирован
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
                     
