@@ -87,7 +87,8 @@ class DepartmentsControllerNew extends Controller
             $department->addDepartmentUsers($request->input('user_id'), $last_id);
         }
 
-        return view('departments.create_department');
+//        return view('departments.create_department');
+        return redirect('/departments')->with('add_dep_name', $request->input('department_name'));
     }
 
     /**
@@ -151,7 +152,8 @@ class DepartmentsControllerNew extends Controller
 
         $department->addDepartmentUsers($request->input('user_id'), $request->input('department_id'));
 
-        return view('departments.update_department');
+//        return view('departments.update_department');
+        return redirect('/departments')->with('edit_dep_name', $request->input('department_name'));
     }
 
     /**
@@ -167,12 +169,15 @@ class DepartmentsControllerNew extends Controller
 
         if ($user_in_department == 0) {
             $department = Department::find($department_id);
+            
+            $department_name = $department->name;
 
             $department->deleteDepartmentImg($department->logo);
 
             $department->delete();
 
-            return view('departments.delete_department');
+//            return view('departments.delete_department');
+            return redirect('/departments')->with('delete_dep_name', $department_name);
         } else {
             return view('departments.not_delete_department');
         }

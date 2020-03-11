@@ -67,7 +67,8 @@ class UserControllerNew extends Controller
             $user->password = bcrypt($request->input('user_password'));
             $user->save();
 
-            return view('users.create_user');
+//            return view('users.users');
+            return redirect('/users')->with('add_user_name', $request->input('user_name'));
         } else {
             return view('users.exist_user');
         }
@@ -125,7 +126,8 @@ class UserControllerNew extends Controller
 
         $user->save();
 
-        return view('users.update_user');
+//        return view('users.update_user');
+        return redirect('/users')->with('edit_user_name', $request->input('user_name'));
     }
 
     /**
@@ -137,11 +139,13 @@ class UserControllerNew extends Controller
     public function destroy($user_id)
     {
         $user = User::find($user_id);
+        $user_name = $user->name;
         $user->delete();
 
         //удаляем все связи пользователя и отделов
         DB::table('users_departments')->where('user_id', '=', $user_id)->delete();
 
-        return view('users.delete_user');
+        return redirect('/users')->with('delete_user_name', $user_name);
+//        return view('users.delete_user');
     }
 }

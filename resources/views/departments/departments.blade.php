@@ -9,6 +9,24 @@
                     {{ __('messages.departments') }} <a href="/departments/create" class="btn btn-primary pull-right" style="float: right;">{{ __('messages.add') }}</a>
                 </div>
                 <div class="card-body">
+                    @if (session('add_dep_name'))
+                        <div class="alert alert-success">
+                            Отдел {{session('add_dep_name')}} добавлен
+                        </div>
+                    @endif
+                    
+                    @if (session('delete_dep_name'))
+                        <div class="alert alert-success">
+                            Отдел {{session('delete_dep_name')}} удален
+                        </div>
+                    @endif
+                    
+                    @if (session('edit_dep_name'))
+                        <div class="alert alert-success">
+                            Отдел {{session('edit_dep_name')}} отредактирован
+                        </div>
+                    @endif
+                    
                     <table class="table">
                         @foreach ($department_list as $department)
                             <tr>
