@@ -27,6 +27,8 @@ Route::get('/departments/{id}/edit', 'DepartmentsControllerNew@edit');
 
 Route::put('/departments/{id}', 'DepartmentsControllerNew@update');
 
+Route::delete('/departments/{id}', 'DepartmentsControllerNew@destroy');
+
 Route::prefix('departments')->group(function () {
 
 //    Route::get('/', 'DepartmentsController@index');
@@ -35,7 +37,7 @@ Route::prefix('departments')->group(function () {
 
 //    Route::any('create', 'DepartmentsController@create');
 
-    Route::get('delete/{department_id}', 'DepartmentsController@delete');
+//    Route::get('delete/{department_id}', 'DepartmentsController@delete');
 
 //    Route::get('edit/{department_id}', 'DepartmentsController@edit');
 

@@ -160,8 +160,21 @@ class DepartmentsControllerNew extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($department_id)
     {
-        //
+        //проверим, есть ли у департмента пользователи
+        $user_in_department = DB::table('users_departments')->where('department_id', '=', $department_id)->count();
+
+        if ($user_in_department == 0) {
+            $department = Department::find($department_id);
+
+            $department->deleteDepartmentImg($department->logo);
+
+            $department->delete();
+
+            return view('departments.delete_department');
+        } else {
+            return view('departments.not_delete_department');
+        }
     }
 }

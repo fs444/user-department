@@ -22,8 +22,14 @@
                                     {{ $department::departmentUsers($department->id) }}
                                 </td>
                                 <td>
-                                    <a href="/departments/{{$department->id}}/edit" class="btn btn-secondary">{{ __('messages.edit') }}</a>
-                                    <a href="/departments/delete/{{$department->id}}" class="btn btn-danger">{{ __('messages.delete') }}</a>
+                                    <a href="/departments/{{$department->id}}/edit" class="btn btn-secondary mr20" style="float: left; margin-right: 20px;">{{ __('messages.edit') }}</a>
+                                    
+                                    <form action="/departments/{{$department->id}}" method="post">
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('are you sure?');">{{ __('messages.delete') }}</button>
+
+                                        @csrf
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
