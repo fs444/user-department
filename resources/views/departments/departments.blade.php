@@ -22,7 +22,7 @@
                                     {{ $department::departmentUsers($department->id) }}
                                 </td>
                                 <td>
-                                    <a href="/departments/{{$department->id}}/edit" class="btn btn-secondary mr20" style="float: left; margin-right: 20px;">{{ __('messages.edit') }}</a>
+                                    <a href="/departments/{{$department->id}}/edit" class="btn btn-secondary" style="float: left; margin-right: 20px;">{{ __('messages.edit') }}</a>
                                     
                                     <form action="/departments/{{$department->id}}" method="post">
                                         <input type="hidden" name="_method" value="DELETE" />

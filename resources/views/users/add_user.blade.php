@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    <form action="/users/create" method="post" enctype="multipart/form-data">
+                    <form action="/users" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="user_name">{{__('messages.name')}}</label>
                             <input type="name" name="user_name" class="form-control" placeholder="{{__('messages.enter_name')}}">

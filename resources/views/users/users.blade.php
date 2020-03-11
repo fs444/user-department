@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{__('messages.users')}} <a href="/users/add" class="btn btn-primary" style="float: right;">{{ __('messages.add') }}</a></div>
+                <div class="card-header">{{__('messages.users')}} <a href="/users/create" class="btn btn-primary" style="float: right;">{{ __('messages.add') }}</a></div>
 
                 <div class="card-body">
                     <table class="table">
@@ -15,8 +15,14 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->created_at}}</td>
                                 <td>
-                                    <a href="/users/edit/{{$user->id}}" class="btn btn-secondary">{{__('messages.edit')}}</a>
-                                    <a href="/users/delete/{{$user->id}}" class="btn btn-danger">{{__('messages.delete')}}</a>
+                                    <a href="/users/{{$user->id}}/edit" class="btn btn-secondary" style="float: left; margin-right: 20px;">{{__('messages.edit')}}</a>
+                                    
+                                    <form action="/users/{{$user->id}}" method="post">
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('are you sure?');">{{__('messages.delete')}}</button>
+                                        
+                                        @csrf
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

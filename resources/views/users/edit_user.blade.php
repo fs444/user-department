@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    <form action="/users/update" method="post" enctype="multipart/form-data">
+                    <form action="/users/{{$user_info->id}}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                           <label for="user_name">{{__('messages.name')}}</label>
                           <input type="name" name="user_name" value="{{$user_info->name}}" class="form-control">
@@ -30,6 +30,8 @@
                           <label for="user_password">{{__('messages.password')}}</label>
                           <input type="password" name="user_password" value="" class="form-control">
                         </div>
+                        @method('PUT')
+                        
                         @csrf
                         <input type="hidden" name="user_id" value="{{$user_info->id}}">
                         <button type="submit" class="btn btn-primary">{{__('messages.submit')}}</button>

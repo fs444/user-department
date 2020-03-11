@@ -29,36 +29,36 @@ Route::put('/departments/{id}', 'DepartmentsControllerNew@update');
 
 Route::delete('/departments/{id}', 'DepartmentsControllerNew@destroy');
 
-Route::prefix('departments')->group(function () {
 
-//    Route::get('/', 'DepartmentsController@index');
+Route::get('/users', 'UserControllerNew@index');
 
-//    Route::get('add', 'DepartmentsController@add');
+Route::get('/users/create', 'UserControllerNew@create');
 
-//    Route::any('create', 'DepartmentsController@create');
+Route::post('/users', 'UserControllerNew@store');
 
-//    Route::get('delete/{department_id}', 'DepartmentsController@delete');
+Route::get('/users/{id}/edit', 'UserControllerNew@edit');
 
-//    Route::get('edit/{department_id}', 'DepartmentsController@edit');
+Route::put('/users/{id}', 'UserControllerNew@update');
 
-//    Route::any('update', 'DepartmentsController@update');
-});
+Route::delete('/users/{id}', 'UserControllerNew@destroy');
 
-Route::prefix('users')->group(function () {
 
-    Route::get('/', 'UsersController@index');
 
-    Route::any('add', 'UsersController@add');
+//Route::prefix('users')->group(function () {
 
-    Route::any('create', 'UsersController@create');
+//    Route::get('/', 'UsersController@index');
 
-    Route::get('delete/{user_id}', 'UsersController@delete');
+//    Route::any('add', 'UsersController@add');
 
-    Route::get('edit/{user_id}', 'UsersController@edit');
+//    Route::any('create', 'UsersController@create');
 
-    Route::any('update', 'UsersController@update');
+//    Route::get('delete/{user_id}', 'UsersController@delete');
 
-});
+//    Route::get('edit/{user_id}', 'UsersController@edit');
+
+//    Route::any('update', 'UsersController@update');
+
+//});
 
 Route::get('locale/{locale}', function ($locale) {
     Session::put('locale', $locale);
