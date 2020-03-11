@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', 'UserControllerNew@index');
+//Route::get('/', 'UserControllerNew@index');
+
+Route::get('/', function () {
+    return redirect('/users');
+});
 
 Route::get('/home', function () {
-    return redirect('/');
+    return redirect('/users');
 });
 
 Route::resource('departments', 'DepartmentsControllerNew');

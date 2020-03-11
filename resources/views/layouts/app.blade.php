@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -28,12 +29,12 @@
                 </a>
 
                 <ul class="nav">
-                  <li class="nav-item">
-                    <a class="nav-link" href="/users">{{__('messages.users')}}</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/departments">{{__('messages.departments')}}</a>
-                  </li>
+                    <li class="nav-item">
+                        <a class="nav-link{{ request()->is('users*') ? ' active-item' : '' }}" href="/users">{{__('messages.users')}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{{ request()->is('departments*') ? ' active-item' : '' }}" href="/departments">{{__('messages.departments')}}</a>
+                    </li>
                 </ul>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
