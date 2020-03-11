@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    <form action="/departments/update" method="post" enctype="multipart/form-data">
+                    <form action="/departments/{{$department_info->id}}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                           <label for="department_name">{{__('messages.name')}}</label>
                           <input type="name" name="department_name" value="{{$department_info->name}}" class="form-control">
@@ -50,6 +50,8 @@
                                 </div>
                             @endforeach
                         </div>
+                        @method('PUT')
+                        
                         @csrf
                         <input type="hidden" name="department_id" value="{{$department_info->id}}">
                         <div class="form-group">

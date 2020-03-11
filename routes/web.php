@@ -11,25 +11,35 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'UsersController@index');
 
 Route::get('/home', function () {
     return redirect('/');
 });
 
+Route::get('/departments', 'DepartmentsControllerNew@index');
+
+Route::get('/departments/create', 'DepartmentsControllerNew@create');
+
+Route::post('/departments', 'DepartmentsControllerNew@store');
+
+Route::get('/departments/{id}/edit', 'DepartmentsControllerNew@edit');
+
+Route::put('/departments/{id}', 'DepartmentsControllerNew@update');
+
 Route::prefix('departments')->group(function () {
 
-    Route::get('/', 'DepartmentsController@index');
+//    Route::get('/', 'DepartmentsController@index');
 
-    Route::get('add', 'DepartmentsController@add');
+//    Route::get('add', 'DepartmentsController@add');
 
-    Route::any('create', 'DepartmentsController@create');
+//    Route::any('create', 'DepartmentsController@create');
 
     Route::get('delete/{department_id}', 'DepartmentsController@delete');
 
-    Route::get('edit/{department_id}', 'DepartmentsController@edit');
+//    Route::get('edit/{department_id}', 'DepartmentsController@edit');
 
-    Route::any('update', 'DepartmentsController@update');
+//    Route::any('update', 'DepartmentsController@update');
 });
 
 Route::prefix('users')->group(function () {

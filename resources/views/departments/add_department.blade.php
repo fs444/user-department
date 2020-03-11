@@ -17,7 +17,7 @@
                         </div>
                     @endif
                     
-                    <form action="/departments/create" method="post" enctype="multipart/form-data">
+                    <form action="/departments" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="department_name">{{__('messages.name')}}</label>
                             <input type="text" name="department_name" class="form-control" placeholder="{{__('messages.enter_name')}}">

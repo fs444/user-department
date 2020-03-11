@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{ __('messages.departments') }} <a href="/departments/add" class="btn btn-primary pull-right" style="float: right;">{{ __('messages.add') }}</a>
+                    {{ __('messages.departments') }} <a href="/departments/create" class="btn btn-primary pull-right" style="float: right;">{{ __('messages.add') }}</a>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -22,7 +22,7 @@
                                     {{ $department::departmentUsers($department->id) }}
                                 </td>
                                 <td>
-                                    <a href="/departments/edit/{{$department->id}}" class="btn btn-secondary">{{ __('messages.edit') }}</a>
+                                    <a href="/departments/{{$department->id}}/edit" class="btn btn-secondary">{{ __('messages.edit') }}</a>
                                     <a href="/departments/delete/{{$department->id}}" class="btn btn-danger">{{ __('messages.delete') }}</a>
                                 </td>
                             </tr>

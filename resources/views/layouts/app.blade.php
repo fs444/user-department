@@ -27,18 +27,14 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
 
-                @guest
-
-                @else
-                    <ul class="nav">
-                      <li class="nav-item">
-                        <a class="nav-link" href="/users">{{__('messages.users')}}</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="/departments">{{__('messages.departments')}}</a>
-                      </li>
-                    </ul>
-                @endguest
+                <ul class="nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/users">{{__('messages.users')}}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/departments">{{__('messages.departments')}}</a>
+                  </li>
+                </ul>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
