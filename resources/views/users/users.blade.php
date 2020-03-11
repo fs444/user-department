@@ -15,7 +15,7 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->created_at}}</td>
                                 <td>
-                                    <a href="/users/{{$user->id}}/edit" class="btn btn-secondary" style="float: left; margin-right: 20px;">{{__('messages.edit')}}</a>
+                                    <a href="/users/{{$user->id}}/edit" class="btn btn-secondary" style="float: left; margin-right: 7px;">{{__('messages.edit')}}</a>
                                     
                                     <form action="/users/{{$user->id}}" method="post">
                                         <input type="hidden" name="_method" value="DELETE" />
